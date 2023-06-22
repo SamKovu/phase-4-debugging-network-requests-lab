@@ -62,12 +62,30 @@ developing your own process.
 
 - Add a new toy when the toy form is submitted
 
-  - How I debugged:
+  - How I debugged: 
+
+    After trying to submit. The dev tools indicated an internal
+    server error which prompted me to look into server logs. Server 
+    logs gave an error "NameError (uninitialized constant ToysController::Toys):". 
+    This indicates a typo it should have been "Toy.create" not "Toys.create" in the
+    controller. 
 
 - Update the number of likes for a toy
 
-  - How I debugged:
+  - How I debugged: 
+
+    After clicking on likes. I looked in the dev tools console and
+    saw  "Uncaught (in promise) SyntaxError: Unexpected  end of JSON input...". 
+    This told me the client was not receiving a json response from the server.
+    The solution was to look at the controller methods and add a "render json:"
+    response to the update method.
 
 - Donate a toy to Goodwill (and delete it from our database)
 
-  - How I debugged:
+  - How I debugged: 
+
+    After trying to donate i.e delete. The browser dev
+    console gave a "404 error". The server logs indicated:
+    "ActionController::RoutingError (No route matches [DELETE] "/toys/13"):"
+    The solution was adding the destroy route in the routes.rb file.
+
